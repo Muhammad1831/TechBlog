@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:techblog/home_page.dart';
-import 'package:techblog/main.dart';
 import 'package:techblog/my_colors.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //after 3 seconds, it will go to the HomePage
     Future.delayed(const Duration(seconds: 3)).then((value) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => HomePage()));
+          .pushReplacement(CupertinoPageRoute(builder: (context) => HomePage()));
     });
 
     // TODO: implement initState
