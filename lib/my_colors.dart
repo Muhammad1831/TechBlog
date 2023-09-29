@@ -7,18 +7,28 @@ class SolidColors {
   static const Color searchIcon = Color.fromARGB(255, 0, 0, 0);
   static const Color lightText = Color.fromARGB(255, 255, 255, 255);
   static const Color statusBarColor = Color.fromARGB(255, 255, 255, 255);
-  static const Color systemNavigationBarColor = Color.fromARGB(255, 255, 255, 255);
+  static const Color systemNavigationBarColor =
+      Color.fromARGB(255, 255, 255, 255);
   static const Color scafoldBackground = Color.fromARGB(255, 255, 255, 255);
   static const Color posterHomePageTitle = Color.fromARGB(255, 255, 255, 255);
-  static const Color posterHomePageSubTitle = Color.fromARGB(204, 255, 255, 255);    
+  static const Color posterHomePageSubTitle =
+      Color.fromARGB(204, 255, 255, 255);
   static const Color selectedPodcast = Color.fromARGB(255, 255, 139, 26);
   static const Color categoryColor = Color.fromARGB(255, 44, 125, 180);
+  static const Color pencilIcon = Color.fromARGB(255, 40, 107, 184);
+  static const Color microphoneIcon = Color.fromARGB(255, 40, 107, 184);
+  static const Color myStringClass = Color.fromARGB(255, 40, 107, 184);
 }
 
 class GradientColors {
   static const List<Color> buttonNavigationGradient = [
     Color.fromARGB(255, 25, 0, 94),
     Color.fromARGB(255, 68, 4, 87)
+  ];
+
+  static const List<Color> buttonNavigationBackGroundGradient = [
+    Color.fromARGB(0, 255, 255, 255),
+    Color.fromARGB(255, 255, 255, 255)
   ];
 
   static const List<Color> tag = [
@@ -30,5 +40,10 @@ class GradientColors {
     Color.fromARGB(0, 40, 41, 46),
     Color.fromARGB(178, 72, 20, 88),
     Color.fromARGB(255, 28, 20, 81)
+  ];
+
+  static const List<Color> hottestPostsImageGradient = [
+    Color.fromARGB(0, 255, 255, 255),
+    Color.fromARGB(255, 0, 0, 0),
   ];
 }
