@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/my_colors.dart';
 import 'dart:math' as math;
-import 'package:techblog/my_string.dart';
 import 'package:techblog/view/home_screen.dart';
+import 'package:techblog/view/profile_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -55,7 +54,10 @@ class HomePage extends StatelessWidget {
           elevation: 0,
         ),
         body: Stack(children: [
-          HomeScreen(size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+          Positioned.fill(
+              child: ProfileScreen(
+                  size: size, textTheme: textTheme, bodyMargin: bodyMargin)),
+          //buttons navigation bar
           Positioned(
             bottom: 0,
             left: 0,
