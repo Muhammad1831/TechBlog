@@ -16,8 +16,29 @@ class $AssetsIconsGen {
   AssetGenImage get hashTagIcon =>
       const AssetGenImage('assets/icons/hash_tag_icon.png');
 
+  /// File path: assets/icons/home_icon.png
+  AssetGenImage get homeIcon =>
+      const AssetGenImage('assets/icons/home_icon.png');
+
+  /// File path: assets/icons/microphone_icon.png
+  AssetGenImage get microphoneIcon =>
+      const AssetGenImage('assets/icons/microphone_icon.png');
+
+  /// File path: assets/icons/pencil_icon.png
+  AssetGenImage get pencilIcon =>
+      const AssetGenImage('assets/icons/pencil_icon.png');
+
+  /// File path: assets/icons/user_icon.png
+  AssetGenImage get userIcon =>
+      const AssetGenImage('assets/icons/user_icon.png');
+
+  /// File path: assets/icons/writer_icon.png
+  AssetGenImage get writerIcon =>
+      const AssetGenImage('assets/icons/writer_icon.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [hashTagIcon];
+  List<AssetGenImage> get values =>
+      [hashTagIcon, homeIcon, microphoneIcon, pencilIcon, userIcon, writerIcon];
 }
 
 class $AssetsImagesGen {
