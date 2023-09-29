@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/my_colors.dart';
 import 'package:techblog/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -44,8 +43,16 @@ class MyApp extends StatelessWidget {
             fontSize: 14,
             color: Colors.white,
             fontWeight: FontWeight.w300),
-        headline3: TextStyle(),
-        headline4: TextStyle(),
+        headline3: TextStyle(
+            fontFamily: 'iran',
+            fontSize: 14,
+            color: SolidColors.myStringClass,
+            fontWeight: FontWeight.w700),
+        headline4: TextStyle(
+            fontFamily: 'iran',
+            fontSize: 14,
+            color: SolidColors.textTitle,
+            fontWeight: FontWeight.w700),
         subtitle1: TextStyle(
             fontFamily: 'iran',
             fontSize: 14,
