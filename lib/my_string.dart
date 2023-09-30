@@ -8,4 +8,7 @@ class MyString {
   static const String relatedPosts = 'نوشته های مرتبط';
   static const String editTitlePodcasts = 'ویرایش عنوان پادکست';
   static const String addFile = 'اضافه کردن فایل';
+  static const String myFavoriteBlog = 'مقالات مورد علاقه من';
+  static const String myFavoritePodcast = 'پادکست های مورد علاقه من';
+  static const String exitFromAccount = 'خروج از حساب کاربری';
 }
