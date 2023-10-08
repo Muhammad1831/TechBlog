@@ -19,6 +19,8 @@ class SolidColors {
   static const Color microphoneIcon = Color.fromARGB(255, 40, 107, 184);
   static const Color myStringClass = Color.fromARGB(255, 40, 107, 184);
   static const Color dividerColor = Color.fromARGB(255, 112, 112, 112);
+  static const Color hintText = Color.fromARGB(255, 190, 190, 190);
+  static const Color textFieldColor = Color.fromARGB(255, 225, 245, 245);
 }
 
 class GradientColors {

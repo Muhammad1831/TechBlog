@@ -11,4 +11,9 @@ class MyString {
   static const String myFavoriteBlog = 'مقالات مورد علاقه من';
   static const String myFavoritePodcast = 'پادکست های مورد علاقه من';
   static const String exitFromAccount = 'خروج از حساب کاربری';
+  static const String welcomeTechBlog = """به تک‌بلاگ خوش اومدی
+
+برای ارسال مطلب و پادکست باید حتما 
+ثبت نام کنی """;
+  static const String enterEmail = 'لطفا ایمیلت رو وارد کن';
 }
