@@ -6,6 +6,7 @@ import 'package:techblog/view/home_page.dart';
 import 'package:techblog/my_colors.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -15,17 +16,15 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     //after 3 seconds, it will go to the HomePage
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      Navigator.of(context)
-          .pushReplacement(CupertinoPageRoute(builder: (context) => HomePage()));
+      Navigator.of(context).pushReplacement(
+          CupertinoPageRoute(builder: (context) => const HomePage()));
     });
 
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: Center(
         child: Column(
