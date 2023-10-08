@@ -26,17 +26,22 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             //HomePage poster cover
-            homePagePoster(size: size, textTheme: textTheme),
+            HomePagePoster(size: size, textTheme: textTheme),
             //List tag in the HomePage
-            homePageTagList(size: size, bodyMargin: bodyMargin, textTheme: textTheme),
+            HomePageTagList(
+                size: size, bodyMargin: bodyMargin, textTheme: textTheme),
             //pencil icon & viewHottestPosts title
-            homePageHottestPostsTitle(bodyMargin: bodyMargin, textTheme: textTheme),
+            HomePageHottestPostsTitle(
+                bodyMargin: bodyMargin, textTheme: textTheme),
             //List Hottest Posts in HomePage
-            homePageHottestPostsList(size: size, bodyMargin: bodyMargin, textTheme: textTheme),
+            HomePageHottestPostsList(
+                size: size, bodyMargin: bodyMargin, textTheme: textTheme),
             //microphone icon & viewHottestPodcast title
-            homePageHottestPodcastTitle(bodyMargin: bodyMargin, textTheme: textTheme),
+            HomePageHottestPodcastTitle(
+                bodyMargin: bodyMargin, textTheme: textTheme),
             //List Hottest Podcast in HomePage
-            homePageHottestPodcastList(size: size, bodyMargin: bodyMargin, textTheme: textTheme),
+            HomePageHottestPodcastList(
+                size: size, bodyMargin: bodyMargin, textTheme: textTheme),
             //an empty space for the bottom of the podcast list from the nvigator buttons bar
             const SizedBox(
               height: 90,
@@ -48,8 +53,8 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class homePageHottestPodcastList extends StatelessWidget {
-  const homePageHottestPodcastList({
+class HomePageHottestPodcastList extends StatelessWidget {
+  const HomePageHottestPodcastList({
     super.key,
     required this.size,
     required this.bodyMargin,
@@ -65,12 +70,13 @@ class homePageHottestPodcastList extends StatelessWidget {
     return SizedBox(
       height: size.height / 3.98,
       child: ListView.builder(
+        physics: const BouncingScrollPhysics(
+            decelerationRate: ScrollDecelerationRate.normal),
         scrollDirection: Axis.horizontal,
         itemCount: blogList.getRange(0, 5).length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.fromLTRB(
-                8, 8, index == 0 ? bodyMargin : 8, 0),
+            padding: EdgeInsets.fromLTRB(8, 8, index == 0 ? bodyMargin : 8, 0),
             child: Column(
               children: [
                 SizedBox(
@@ -80,18 +86,15 @@ class homePageHottestPodcastList extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
-                                image: NetworkImage(
-                                    blogList[index].imageURL),
+                                image: NetworkImage(blogList[index].imageURL),
                                 fit: BoxFit.cover)),
                         foregroundDecoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20),
                             gradient: const LinearGradient(
-                                colors: GradientColors
-                                    .hottestPostsImageGradient,
+                                colors:
+                                    GradientColors.hottestPostsImageGradient,
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter)),
                       ),
@@ -100,18 +103,17 @@ class homePageHottestPodcastList extends StatelessWidget {
                         right: 0,
                         left: 0,
                         child: Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
                               blogList[index].writer,
-                              style: textTheme.headline2,
+                              style: textTheme.displayMedium,
                             ),
                             Row(
                               children: [
                                 Text(
                                   blogList[index].views,
-                                  style: textTheme.headline2,
+                                  style: textTheme.displayMedium,
                                 ),
                                 const SizedBox(
                                   width: 4,
@@ -133,7 +135,7 @@ class homePageHottestPodcastList extends StatelessWidget {
                   width: size.width / 2.6,
                   child: Text(
                     blogList[index].title,
-                    style: textTheme.headline4,
+                    style: textTheme.bodyText1,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
@@ -147,8 +149,8 @@ class homePageHottestPodcastList extends StatelessWidget {
   }
 }
 
-class homePageHottestPodcastTitle extends StatelessWidget {
-  const homePageHottestPodcastTitle({
+class HomePageHottestPodcastTitle extends StatelessWidget {
+  const HomePageHottestPodcastTitle({
     super.key,
     required this.bodyMargin,
     required this.textTheme,
@@ -180,8 +182,8 @@ class homePageHottestPodcastTitle extends StatelessWidget {
   }
 }
 
-class homePageHottestPostsList extends StatelessWidget {
-  const homePageHottestPostsList({
+class HomePageHottestPostsList extends StatelessWidget {
+  const HomePageHottestPostsList({
     super.key,
     required this.size,
     required this.bodyMargin,
@@ -203,8 +205,7 @@ class homePageHottestPostsList extends StatelessWidget {
         itemCount: blogList.getRange(0, 5).length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.fromLTRB(
-                8, 8, index == 0 ? bodyMargin : 8, 0),
+            padding: EdgeInsets.fromLTRB(8, 8, index == 0 ? bodyMargin : 8, 0),
             child: Column(
               children: [
                 SizedBox(
@@ -214,19 +215,16 @@ class homePageHottestPostsList extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
-                              image: NetworkImage(
-                                  blogList[index].imageURL),
+                              image: NetworkImage(blogList[index].imageURL),
                               fit: BoxFit.cover,
                             )),
                         foregroundDecoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20),
                             gradient: const LinearGradient(
-                                colors: GradientColors
-                                    .hottestPostsImageGradient,
+                                colors:
+                                    GradientColors.hottestPostsImageGradient,
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter)),
                       ),
@@ -235,8 +233,7 @@ class homePageHottestPostsList extends StatelessWidget {
                         right: 0,
                         left: 0,
                         child: Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
                               blogList[index].writer,
@@ -268,7 +265,7 @@ class homePageHottestPostsList extends StatelessWidget {
                   width: size.width / 2.6,
                   child: Text(
                     blogList[index].title,
-                    style: textTheme.headline4,
+                    style: textTheme.bodyText1,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
@@ -282,8 +279,8 @@ class homePageHottestPostsList extends StatelessWidget {
   }
 }
 
-class homePageHottestPostsTitle extends StatelessWidget {
-  const homePageHottestPostsTitle({
+class HomePageHottestPostsTitle extends StatelessWidget {
+  const HomePageHottestPostsTitle({
     super.key,
     required this.bodyMargin,
     required this.textTheme,
@@ -315,8 +312,8 @@ class homePageHottestPostsTitle extends StatelessWidget {
   }
 }
 
-class homePageTagList extends StatelessWidget {
-  const homePageTagList({
+class HomePageTagList extends StatelessWidget {
+  const HomePageTagList({
     super.key,
     required this.size,
     required this.bodyMargin,
@@ -342,20 +339,18 @@ class homePageTagList extends StatelessWidget {
             return Padding(
               /*if it was our first container, it gives bodyMargin spaces
               from the right, otherwise it gives 8 spaces*/
-              padding: EdgeInsets.fromLTRB(
-                  8, 0, index == 0 ? bodyMargin : 8, 0),
+              padding:
+                  EdgeInsets.fromLTRB(8, 0, index == 0 ? bodyMargin : 8, 0),
               child: Container(
                 height: size.height / 22.8,
                 decoration: const BoxDecoration(
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(15)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                     gradient: LinearGradient(
                         colors: GradientColors.tag,
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight)),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 20, right: 12),
+                  padding: const EdgeInsets.only(left: 20, right: 12),
                   child: Row(
                     children: [
                       //hash tag icon in every container
@@ -369,8 +364,8 @@ class homePageTagList extends StatelessWidget {
                       ),
                       //the title written in each container
                       Text(
-                        tagList[index].tag_name,
-                        style: textTheme.headline2,
+                        tagList[index].tagName,
+                        style: textTheme.displayMedium,
                       )
                     ],
                   ),
@@ -384,8 +379,8 @@ class homePageTagList extends StatelessWidget {
   }
 }
 
-class homePagePoster extends StatelessWidget {
-  const homePagePoster({
+class HomePagePoster extends StatelessWidget {
+  const HomePagePoster({
     super.key,
     required this.size,
     required this.textTheme,
@@ -405,15 +400,13 @@ class homePagePoster extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               image: DecorationImage(
-                  image: AssetImage(
-                      homePagePosterMap["posterImage"]),
+                  image: AssetImage(homePagePosterMap["posterImage"]),
                   fit: BoxFit.cover)),
           // the gradient is placed on the HomePage poster cover image
           foregroundDecoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               gradient: const LinearGradient(
-                  colors:
-                      GradientColors.posterCoverHomePageGradient,
+                  colors: GradientColors.posterCoverHomePageGradient,
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter)),
         ),
@@ -435,18 +428,17 @@ class homePagePoster extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
                         homePagePosterMap["writer"] +
                             " - " +
                             homePagePosterMap["publicationDate"],
-                        style: textTheme.subtitle1),
+                        style: textTheme.headline4),
                     Row(
                       children: [
                         Text(homePagePosterMap["views"],
-                            style: textTheme.subtitle1),
+                            style: textTheme.headline4),
                         const SizedBox(
                           width: 5,
                         ),
@@ -459,8 +451,7 @@ class homePagePoster extends StatelessWidget {
                     )
                   ],
                 ),
-                Text(homePagePosterMap["title"],
-                    style: textTheme.headline1)
+                Text(homePagePosterMap["title"], style: textTheme.headline1)
               ],
             ))
       ],
