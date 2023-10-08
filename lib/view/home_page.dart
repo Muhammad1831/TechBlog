@@ -1,13 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/my_colors.dart';
-import 'dart:math' as math;
 import 'package:techblog/view/home_screen.dart';
+import 'dart:math' as math;
 import 'package:techblog/view/profile_screen.dart';
+import 'package:techblog/view/register_techblog.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var selectedPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -55,58 +63,100 @@ class HomePage extends StatelessWidget {
         ),
         body: Stack(children: [
           Positioned.fill(
-              child: ProfileScreen(
-                  size: size, textTheme: textTheme, bodyMargin: bodyMargin)),
+            child: IndexedStack(index: selectedPageIndex, children: [
+              HomeScreen(
+                  size: size,
+                  textTheme: textTheme,
+                  bodyMargin: bodyMargin), // index 0
+              const RegisterTechBlog(), // index 1
+              ProfileScreen(
+                  size: size,
+                  textTheme: textTheme,
+                  bodyMargin: bodyMargin), // index 2
+            ]),
+          ),
           //buttons navigation bar
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: size.height / 10,
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: GradientColors.buttonNavigationBackGroundGradient,
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter)),
-              child: Padding(
-                padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
-                child: Container(
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      gradient: LinearGradient(
-                          colors: GradientColors.buttonNavigationGradient)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
-                          onPressed: (() {}),
-                          icon: ImageIcon(
-                            Assets.icons.homeIcon.provider(),
-                            color: Colors.white,
-                            size: 28,
-                          )),
-                      IconButton(
-                          onPressed: (() {}),
-                          icon: ImageIcon(
-                            Assets.icons.writerIcon.provider(),
-                            color: Colors.white,
-                            size: 28,
-                          )),
-                      IconButton(
-                          onPressed: (() {}),
-                          icon: ImageIcon(
-                            Assets.icons.userIcon.provider(),
-                            color: Colors.white,
-                            size: 28,
-                          )),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+          BottomNavigationBar(
+            size: size,
+            bodyMargin: bodyMargin,
+            setIndexPage: (value) {
+              setState(() {
+                selectedPageIndex = value;
+              });
+            },
           ),
         ]),
+      ),
+    );
+  }
+}
+
+class BottomNavigationBar extends StatelessWidget {
+  const BottomNavigationBar(
+      {super.key,
+      required this.size,
+      required this.bodyMargin,
+      required this.setIndexPage});
+
+  final Size size;
+  final double bodyMargin;
+  final Function(int) setIndexPage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        height: size.height / 10,
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                colors: GradientColors.buttonNavigationBackGroundGradient,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter)),
+        child: Padding(
+          padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
+          child: Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                gradient: LinearGradient(
+                    colors: GradientColors.buttonNavigationGradient)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                    onPressed: (() {
+                      setIndexPage(0);
+                    }),
+                    icon: ImageIcon(
+                      Assets.icons.homeIcon.provider(),
+                      color: Colors.white,
+                      size: 28,
+                    )),
+                IconButton(
+                    onPressed: (() {
+                      Navigator.of(context).pushReplacement(CupertinoPageRoute(
+                          builder: (context) => const RegisterTechBlog()));
+                    }),
+                    icon: ImageIcon(
+                      Assets.icons.writerIcon.provider(),
+                      color: Colors.white,
+                      size: 28,
+                    )),
+                IconButton(
+                    onPressed: (() {
+                      setIndexPage(2);
+                    }),
+                    icon: ImageIcon(
+                      Assets.icons.userIcon.provider(),
+                      color: Colors.white,
+                      size: 28,
+                    )),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
