@@ -10,16 +10,15 @@ Map homePagePosterMap = {
 };
 
 List<HashTagModel> tagList = [
-  HashTagModel(tag_name: 'جاوا'),
-  HashTagModel(tag_name: 'برنامه نویسی وب'),
-  HashTagModel(tag_name: 'پادکست رادیو کدیاد'),
-  HashTagModel(tag_name: 'هوش مصنوعی'),
-  HashTagModel(tag_name: 'فلاتر'),
-  HashTagModel(tag_name: 'پایتون'),
-  HashTagModel(tag_name: 'ماشین لرنینگ'),
-  HashTagModel(tag_name: 'آموزش لاراول'),
+  HashTagModel(tagName: 'جاوا'),
+  HashTagModel(tagName: 'برنامه نویسی وب'),
+  HashTagModel(tagName: 'پادکست رادیو کدیاد'),
+  HashTagModel(tagName: 'هوش مصنوعی'),
+  HashTagModel(tagName: 'فلاتر'),
+  HashTagModel(tagName: 'پایتون'),
+  HashTagModel(tagName: 'ماشین لرنینگ'),
+  HashTagModel(tagName: 'آموزش لاراول'),
 ];
-
 List<BlogPageModel> blogList = [
   BlogPageModel(
       id: 1,

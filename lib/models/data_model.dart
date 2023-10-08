@@ -1,6 +1,6 @@
 class HashTagModel {
-  String tag_name;
-  HashTagModel({required this.tag_name});
+  String tagName;
+  HashTagModel({required this.tagName});
 }
 
 class BlogPageModel {
