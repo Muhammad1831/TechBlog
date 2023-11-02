@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/my_colors.dart';
+import 'package:techblog/my_component.dart';
 import 'package:techblog/my_string.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -22,6 +22,7 @@ class ProfileScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(
             decelerationRate: ScrollDecelerationRate.normal),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: size.height / 13.5,
@@ -48,7 +49,66 @@ class ProfileScreen extends StatelessWidget {
                   style: textTheme.headline3,
                 )
               ],
-            )
+            ),
+            SizedBox(
+              height: size.height / 13.5,
+            ),
+            Text(
+              "فاطمه امیری",
+              style: textTheme.bodyText1,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              "fatemeamiri@gmail.com",
+              style: textTheme.bodyText1,
+            ),
+            SizedBox(
+              height: size.height / 17.2,
+            ),
+            TechBlogDivider(size: size),
+            SizedBox(
+              height: 45,
+              child: InkWell(
+                onTap: () {},
+                splashColor: SolidColors.primaryColor,
+                child: Center(
+                  child: Text(
+                    MyString.myFavoriteBlog,
+                    style: textTheme.bodyText1,
+                  ),
+                ),
+              ),
+            ),
+            TechBlogDivider(size: size),
+            SizedBox(
+              height: 45,
+              child: InkWell(
+                onTap: () {},
+                splashColor: SolidColors.primaryColor,
+                child: Center(
+                  child: Text(
+                    MyString.myFavoritePodcast,
+                    style: textTheme.bodyText1,
+                  ),
+                ),
+              ),
+            ),
+            TechBlogDivider(size: size),
+            SizedBox(
+              height: 45,
+              child: InkWell(
+                onTap: () {},
+                splashColor: SolidColors.primaryColor,
+                child: Center(
+                  child: Text(
+                    MyString.exitFromAccount,
+                    style: textTheme.bodyText1,
+                  ),
+                ),
+              ),
+            ),
           ],
         ));
   }

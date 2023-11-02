@@ -8,7 +8,7 @@ Map homePagePosterMap = {
   "views": "253",
   "title": "دوازده قدم برنامه نویسی یک دوره ی"
 };
-
+List<String> chooseCategoriesLike = [];
 List<HashTagModel> tagList = [
   HashTagModel(tagName: 'جاوا'),
   HashTagModel(tagName: 'برنامه نویسی وب'),

@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //after 3 seconds, it will go to the HomePage
     Future.delayed(const Duration(seconds: 3)).then((value) {
       Navigator.of(context).pushReplacement(
-          CupertinoPageRoute(builder: (context) => const HomePage()));
+          CupertinoPageRoute(builder: (context) => HomePage()));
     });
 
     super.initState();

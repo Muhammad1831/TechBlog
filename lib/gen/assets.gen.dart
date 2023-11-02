@@ -46,6 +46,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/flash_down.png
+  AssetGenImage get flashDown =>
+      const AssetGenImage('assets/images/flash_down.png');
+
   /// File path: assets/images/guide_robot.svg
   SvgGenImage get guideRobot =>
       const SvgGenImage('assets/images/guide_robot.svg');
@@ -62,7 +66,8 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/profileAvatar.png');
 
   /// List of all assets
-  List<dynamic> get values => [guideRobot, logo, posterHomePage, profileAvatar];
+  List<dynamic> get values =>
+      [flashDown, guideRobot, logo, posterHomePage, profileAvatar];
 }
 
 class Assets {

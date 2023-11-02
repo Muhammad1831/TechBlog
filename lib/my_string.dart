@@ -11,9 +11,13 @@ class MyString {
   static const String myFavoriteBlog = 'مقالات مورد علاقه من';
   static const String myFavoritePodcast = 'پادکست های مورد علاقه من';
   static const String exitFromAccount = 'خروج از حساب کاربری';
+  static const String enterEmail = 'لطفا ایمیلت رو وارد کن';
+  static const String enterActivatorCode = 'کد فعال سازی رو وارد کن ';
   static const String welcomeTechBlog = """به تک‌بلاگ خوش اومدی
 
 برای ارسال مطلب و پادکست باید حتما 
 ثبت نام کنی """;
-  static const String enterEmail = 'لطفا ایمیلت رو وارد کن';
+  static const String completeRegisteration = """تبریک میگم ، ایمیل با موفقیت تایید شد
+لطفا اطلاعات ثبت نام رو کامل کن""";
+  static const String chooseCategoriesLike = 'دسته بندی هایی که دوست داری رو انتخاب کن';
 }

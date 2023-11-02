@@ -8,7 +8,7 @@ import 'package:techblog/view/profile_screen.dart';
 import 'package:techblog/view/register_techblog.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var selectedPageIndex = 0;
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +28,83 @@ class _HomePageState extends State<HomePage> {
 
     return SafeArea(
       child: Scaffold(
+        key: _key,
+        drawer: Drawer(
+          backgroundColor: SolidColors.scafoldBackground,
+          child: Padding(
+            padding: EdgeInsets.only(left: bodyMargin, right: bodyMargin),
+            child: ListView(
+              children: [
+                DrawerHeader(
+                    child: Image.asset(
+                  Assets.images.logo.path,
+                  scale: 1.6,
+                )),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                  thickness: 1,
+                ),
+                ListTile(
+                  title: Text(
+                    'پروفایل کاربری',
+                    style: textTheme.bodyText1,
+                  ),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                  thickness: 1,
+                ),
+                ListTile(
+                  title: Text(
+                    'درباره تک‌بلاگ',
+                    style: textTheme.bodyText1,
+                  ),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                  thickness: 1,
+                ),
+                ListTile(
+                  title: Text(
+                    'اشتراک گذاری تک بلاگ',
+                    style: textTheme.bodyText1,
+                  ),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                  thickness: 1,
+                ),
+                ListTile(
+                  title: Text(
+                    'تک‌بلاگ در گیت هاب',
+                    style: textTheme.bodyText1,
+                  ),
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+        ),
         //HomaPage Appbar
         appBar: AppBar(
+          // remove the default drawer button
+          automaticallyImplyLeading: false,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               //menu icon in HomaPage top bar
-              Icon(
-                Icons.menu,
-                color: SolidColors.menuIcon,
-                size: size.width / 18,
+              InkWell(
+                onTap: () {
+                  _key.currentState!.openDrawer();
+                },
+                child: Icon(
+                  Icons.menu,
+                  color: SolidColors.menuIcon,
+                  size: size.width / 18,
+                ),
               ),
               //logo image in HomaPage top bar
               Image(

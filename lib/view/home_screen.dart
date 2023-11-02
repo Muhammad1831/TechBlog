@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/my_colors.dart';
+import 'package:techblog/my_component.dart';
 import 'package:techblog/my_string.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -341,36 +342,7 @@ class HomePageTagList extends StatelessWidget {
               from the right, otherwise it gives 8 spaces*/
               padding:
                   EdgeInsets.fromLTRB(8, 0, index == 0 ? bodyMargin : 8, 0),
-              child: Container(
-                height: size.height / 22.8,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    gradient: LinearGradient(
-                        colors: GradientColors.tag,
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 12),
-                  child: Row(
-                    children: [
-                      //hash tag icon in every container
-                      ImageIcon(
-                        Assets.icons.hashTagIcon.provider(),
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      //the title written in each container
-                      Text(
-                        tagList[index].tagName,
-                        style: textTheme.displayMedium,
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              child: TagContainer(size: size, textTheme: textTheme, index: index),
             );
           },
         ),

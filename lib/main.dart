@@ -38,10 +38,10 @@ class MyApp extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: const BorderSide(width: 1.5)),
+                  borderSide: const BorderSide(color: Color.fromARGB(255, 45, 180, 230), width: 1.5)),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: const BorderSide(width: 1.5)),
+                  borderSide: const BorderSide(color: Color.fromARGB(255, 45, 180, 230), width: 1.5)),
               hintStyle: const TextStyle(
                   fontFamily: 'iran',
                   fontSize: 14,
