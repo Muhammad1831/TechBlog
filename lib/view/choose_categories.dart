@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:techblog/controller/home_screen_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/models/fake_data.dart';
-import 'package:techblog/my_colors.dart';
-import 'package:techblog/my_component.dart';
-import 'package:techblog/my_string.dart';
-import 'package:techblog/view/home_page.dart';
+import 'package:techblog/component/my_colors.dart';
+import 'package:techblog/component/my_component.dart';
+import 'package:techblog/component/my_string.dart';
+import 'package:techblog/view/main_screen/home_page.dart';
 
 class ChooseCategories extends StatefulWidget {
   const ChooseCategories({super.key});
@@ -23,6 +23,10 @@ class _ChooseCategoriesState extends State<ChooseCategories> {
     var textTheme = Theme.of(context).textTheme;
     double bodyMargin = size.width / 10;
 
+    RxList chooseCategoriesLike = RxList();
+
+    var homeScreenController = Get.find<HomeScreenController>();
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -37,7 +41,7 @@ class _ChooseCategoriesState extends State<ChooseCategories> {
                   const SizedBox(
                     height: 60,
                   ),
-                  SvgPicture.asset(Assets.images.guideRobot.path,
+                  SvgPicture.asset(Assets.images.happyGuideRobot.path,
                       height: size.height / 6.7),
                   const SizedBox(
                     height: 16,
@@ -73,7 +77,7 @@ class _ChooseCategoriesState extends State<ChooseCategories> {
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        itemCount: tagList.length,
+                        itemCount: homeScreenController.tagList.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -83,12 +87,11 @@ class _ChooseCategoriesState extends State<ChooseCategories> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              setState(() {
-                                  if (!chooseCategoriesLike.contains(tagList[index].tagName)) {
-                                    chooseCategoriesLike
-                                      .add(tagList[index].tagName);
-                                  }
-                              });
+                              if (!chooseCategoriesLike.contains(
+                                  homeScreenController.tagList[index].title)) {
+                                chooseCategoriesLike.add(
+                                    homeScreenController.tagList[index].title!);
+                              }
                             },
                             child: TagContainer(
                                 size: size, textTheme: textTheme, index: index),
@@ -131,7 +134,7 @@ class _ChooseCategoriesState extends State<ChooseCategories> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    chooseCategoriesLike[index],
+                                    chooseCategoriesLike[index].value,
                                     style: textTheme.bodyText1,
                                   ),
                                   const SizedBox(

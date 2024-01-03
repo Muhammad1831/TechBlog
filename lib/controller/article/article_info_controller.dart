@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:techblog/component/api_constant.dart';
+import 'package:techblog/component/storage_constant.dart';
 import 'package:techblog/models/article_info_model.dart';
 import 'package:techblog/models/related_info_model.dart';
 import 'package:techblog/models/tags_model.dart';
@@ -13,19 +15,13 @@ class ArticleInfoController extends GetxController {
   RxBool loading = false.obs;
   RxInt id = RxInt(0);
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   Future<void> getArticleInfo() async {
     //TODO: implement later
     articleInfoModel = ArticleInfoModel().obs;
-    var userId = '';
     loading.value = true;
 
-    var response = await DioService().getMethod(ApiConstant.baseUrl +
-        'article/get.php?command=info&id=$id&user_id=$userId');
+    var response = await DioService().getMethod(
+        "${ApiConstant.baseUrl}article/get.php?command=info&id=$id&user_id=${GetStorage().read(StorageKey.userId)}");
 
     if (response.statusCode == 200) {
       articleInfoModel.value = ArticleInfoModel.fromjson(response.data);

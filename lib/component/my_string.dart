@@ -13,7 +13,8 @@ class MyString {
   static const String exitFromAccount = 'خروج از حساب کاربری';
   static const String enterEmail = 'لطفا ایمیلت رو وارد کن';
   static const String enterActivatorCode = 'کد فعال سازی رو وارد کن ';
-  static const String techBlogGithubUrl = 'https://github.com/sasansafari/techblog';
+  static const String techBlogGithubUrl =
+      'https://github.com/sasansafari/techblog';
   static const String welcomeTechBlog = """به تک‌بلاگ خوش اومدی
 
 برای ارسال مطلب و پادکست باید حتما 
@@ -27,4 +28,7 @@ www.sasansafari.com
 لطفا اطلاعات ثبت نام رو کامل کن""";
   static const String chooseCategoriesLike =
       'دسته بندی هایی که دوست داری رو انتخاب کن';
+  static const String nothingArticle =
+      '''هنوز هیچ مقاله ای به جامعه گیک های فارسی 
+اضافه نکردی !!!''';
 }

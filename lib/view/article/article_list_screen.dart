@@ -2,18 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:techblog/component/my_component.dart';
-import 'package:techblog/controller/article_info_controller.dart';
-import 'package:techblog/controller/article_list_controller.dart';
+import 'package:techblog/controller/article/article_info_controller.dart';
+import 'package:techblog/controller/article/article_list_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/view/article_info_screen.dart';
+import 'package:techblog/common/route_page.dart';
 
 // ignore: must_be_immutable
 class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({super.key});
-  ArticleListController articleListController =
-      Get.put(ArticleListController());
-  ArticleInfoController articleInfoController =
-      Get.put(ArticleInfoController());
+  var articleListController = Get.find<ArticleListController>();
+  var articleInfoController = Get.find<ArticleInfoController>();
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -42,7 +40,7 @@ class ArticleListScreen extends StatelessWidget {
                                 articleListController.articleList[index].id
                                     .toString());
                             articleInfoController.getArticleInfo();
-                            Get.to(() => ArticleInfoScreen());
+                            Get.toNamed(RoutePage.articleInfo);
                           },
                           child: Container(
                             height: size.height / 8.5,

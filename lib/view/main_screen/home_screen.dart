@@ -1,29 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:techblog/controller/article_info_controller.dart';
-import 'package:techblog/controller/article_list_controller.dart';
+import 'package:techblog/component/params.dart';
+import 'package:techblog/component/pencil_blue_title.dart';
+import 'package:techblog/controller/article/article_info_controller.dart';
+import 'package:techblog/controller/article/article_list_controller.dart';
 import 'package:techblog/controller/home_screen_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/component/my_colors.dart';
 import 'package:techblog/component/my_component.dart';
 import 'package:techblog/component/my_string.dart';
-import 'package:techblog/view/article_info_screen.dart';
-import 'package:techblog/view/article_list_screen.dart';
+import 'package:techblog/common/route_page.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   HomeScreen({
     super.key,
-    required this.size,
-    required this.textTheme,
-    required this.bodyMargin,
   });
-
-  final Size size;
-  final TextTheme textTheme;
-  final double bodyMargin;
 
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
   ArticleInfoController articleInfoController =
@@ -48,7 +42,16 @@ class HomeScreen extends StatelessWidget {
                     //List tag in the HomePage
                     homePageTagList(),
                     //pencil icon & viewHottestPosts title
-                    homePageHottestPostsTitle(),
+                    GestureDetector(
+                        onTap: () {
+                          Get.toNamed(RoutePage.articleList);
+                        },
+                        child: Padding(
+                          padding:
+                              EdgeInsets.fromLTRB(0, 40, Params.bodyMargin, 0),
+                          child: const PencilBlueTitle(
+                              title: MyString.viewHottestPosts),
+                        )),
                     //List Hottest Posts in HomePage
                     homePageHottestPostsList(),
                     //microphone icon & viewHottestPodcast title
@@ -72,14 +75,14 @@ class HomeScreen extends StatelessWidget {
         articleInfoController.id.value =
             int.parse(homeScreenController.poster.value.id.toString());
         articleInfoController.getArticleInfo();
-        Get.to(ArticleInfoScreen());
+        Get.toNamed(RoutePage.articleInfo);
       },
       child: Stack(
         children: [
           // poster cover image
           SizedBox(
-            height: size.height / 4.2,
-            width: size.width / 1.19,
+            height: Params.size.height / 4.2,
+            width: Params.size.width / 1.19,
             child: CachedNetworkImage(
               imageUrl: homeScreenController.poster.value.image!,
               imageBuilder: (context, imageProvider) {
@@ -129,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                         homePagePosterMap["writer"] +
                             " - " +
                             homePagePosterMap["publicationDate"],
-                        style: textTheme.headline4,
+                        style: Params.textTheme.headline4,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
@@ -139,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(homePagePosterMap["views"],
-                              style: textTheme.headline4),
+                              style: Params.textTheme.headline4),
                           const SizedBox(
                             width: 5,
                           ),
@@ -156,7 +159,7 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 10, right: 16),
                     child: Text(
                       homeScreenController.poster.value.title!,
-                      style: textTheme.headline1,
+                      style: Params.textTheme.headline1,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
@@ -172,7 +175,7 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: SizedBox(
-        height: size.height / 22.8,
+        height: Params.size.height / 22.8,
         child: ListView.builder(
           physics: const BouncingScrollPhysics(
               decelerationRate: ScrollDecelerationRate.fast),
@@ -182,16 +185,18 @@ class HomeScreen extends StatelessWidget {
             return Padding(
               /*if it was our first container, it gives bodyMargin spaces
               from the right, otherwise it gives 8 spaces*/
-              padding:
-                  EdgeInsets.fromLTRB(8, 0, index == 0 ? bodyMargin : 8, 0),
+              padding: EdgeInsets.fromLTRB(
+                  8, 0, index == 0 ? Params.bodyMargin : 8, 0),
               child: GestureDetector(
                   onTap: () {
                     var tagId = homeScreenController.tagList[index].id!;
                     articleListController.getArticleListWithTagId(tagId);
-                    Get.to(ArticleListScreen());
+                    Get.toNamed(RoutePage.articleList);
                   },
                   child: TagContainer(
-                      size: size, textTheme: textTheme, index: index)),
+                      size: Params.size,
+                      textTheme: Params.textTheme,
+                      index: index)),
             );
           },
         ),
@@ -199,35 +204,9 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget homePageHottestPostsTitle() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(0, 40, bodyMargin, 0),
-      child: GestureDetector(
-        onTap: () {
-          Get.to(ArticleListScreen());
-        },
-        child: Row(
-          children: [
-            ImageIcon(
-              Assets.icons.pencilIcon.provider(),
-              color: SolidColors.pencilIcon,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Text(
-              MyString.viewHottestPosts,
-              style: textTheme.headline3,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget homePageHottestPostsList() {
     return SizedBox(
-      height: size.height / 3.98,
+      height: Params.size.height / 3.98,
       child: Obx(() {
         return ListView.builder(
           physics: const BouncingScrollPhysics(
@@ -236,21 +215,21 @@ class HomeScreen extends StatelessWidget {
           itemCount: homeScreenController.topVisitedPosts.length,
           itemBuilder: (context, index) {
             return Padding(
-              padding:
-                  EdgeInsets.fromLTRB(8, 8, index == 0 ? bodyMargin : 8, 0),
+              padding: EdgeInsets.fromLTRB(
+                  8, 8, index == 0 ? Params.bodyMargin : 8, 0),
               child: GestureDetector(
                 onTap: () {
                   articleInfoController.id.value = int.parse(
                       homeScreenController.topVisitedPosts[index].id
                           .toString());
                   articleInfoController.getArticleInfo();
-                  Get.to(ArticleInfoScreen());
+                  Get.toNamed(RoutePage.articleInfo);
                 },
                 child: Column(
                   children: [
                     SizedBox(
-                      height: size.height / 5.5,
-                      width: size.width / 2.6,
+                      height: Params.size.height / 5.5,
+                      width: Params.size.width / 2.6,
                       child: Stack(
                         children: [
                           CachedNetworkImage(
@@ -292,14 +271,14 @@ class HomeScreen extends StatelessWidget {
                                 Text(
                                   homeScreenController
                                       .topVisitedPosts[index].author!,
-                                  style: textTheme.headline2,
+                                  style: Params.textTheme.headline2,
                                 ),
                                 Row(
                                   children: [
                                     Text(
                                       homeScreenController
                                           .topVisitedPosts[index].view!,
-                                      style: textTheme.headline2,
+                                      style: Params.textTheme.headline2,
                                     ),
                                     const SizedBox(
                                       width: 4,
@@ -318,10 +297,10 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: size.width / 2.6,
+                      width: Params.size.width / 2.6,
                       child: Text(
                         homeScreenController.topVisitedPosts[index].title!,
-                        style: textTheme.bodyText1,
+                        style: Params.textTheme.bodyText1,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
@@ -338,7 +317,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget homePageHottestPodcastTitle() {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 40, bodyMargin, 0),
+      padding: EdgeInsets.fromLTRB(0, 40, Params.bodyMargin, 0),
       child: Row(
         children: [
           ImageIcon(
@@ -350,7 +329,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Text(
             MyString.viewHottestPodcasts,
-            style: textTheme.headline3,
+            style: Params.textTheme.headline3,
           )
         ],
       ),
@@ -359,7 +338,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget homePageHottestPodcastList() {
     return SizedBox(
-      height: size.height / 3.98,
+      height: Params.size.height / 3.98,
       child: Obx(() {
         return ListView.builder(
           physics: const BouncingScrollPhysics(
@@ -368,13 +347,13 @@ class HomeScreen extends StatelessWidget {
           itemCount: homeScreenController.topVisitedPodcast.length,
           itemBuilder: (context, index) {
             return Padding(
-              padding:
-                  EdgeInsets.fromLTRB(8, 8, index == 0 ? bodyMargin : 8, 0),
+              padding: EdgeInsets.fromLTRB(
+                  8, 8, index == 0 ? Params.bodyMargin : 8, 0),
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height / 5.5,
-                    width: size.width / 2.6,
+                    height: Params.size.height / 5.5,
+                    width: Params.size.width / 2.6,
                     child: Stack(
                       children: [
                         CachedNetworkImage(
@@ -417,14 +396,14 @@ class HomeScreen extends StatelessWidget {
                                     ? 'NULL'
                                     : homeScreenController
                                         .topVisitedPodcast[index].author!,
-                                style: textTheme.displayMedium,
+                                style: Params.textTheme.displayMedium,
                               ),
                               Row(
                                 children: [
                                   Text(
                                     homeScreenController
                                         .topVisitedPodcast[index].view!,
-                                    style: textTheme.displayMedium,
+                                    style: Params.textTheme.displayMedium,
                                   ),
                                   const SizedBox(
                                     width: 4,
@@ -443,10 +422,10 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: size.width / 2.6,
+                    width: Params.size.width / 2.6,
                     child: Text(
                       homeScreenController.topVisitedPodcast[index].title!,
-                      style: textTheme.bodyText1,
+                      style: Params.textTheme.bodyText1,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),

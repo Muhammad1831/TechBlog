@@ -1,24 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:techblog/component/my_colors.dart';
 import 'package:techblog/component/my_component.dart';
 import 'package:techblog/component/my_string.dart';
-import 'package:techblog/controller/article_info_controller.dart';
-import 'package:techblog/controller/article_list_controller.dart';
+import 'package:techblog/controller/article/article_info_controller.dart';
+import 'package:techblog/controller/article/article_list_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/view/article_list_screen.dart';
+import 'package:techblog/common/route_page.dart';
 
 // ignore: must_be_immutable
 class ArticleInfoScreen extends StatelessWidget {
   ArticleInfoScreen({super.key});
 
-  ArticleInfoController articleInfoController =
-      Get.put(ArticleInfoController());
-  ArticleListController articleListController =
-      Get.put(ArticleListController());
+  var articleInfoController = Get.find<ArticleInfoController>();
+  var articleListController = Get.find<ArticleListController>();
 
   @override
   Widget build(BuildContext context) {
@@ -218,7 +215,7 @@ class ArticleInfoScreen extends StatelessWidget {
                     articleInfoController.appBarTitle.value =
                         articleInfoController.tagsInfo[index].title!;
                     await articleListController.getArticleListWithTagId(tagId);
-                    Get.to(ArticleListScreen());
+                    Get.toNamed(RoutePage.articleList);
                   },
                   child: Container(
                     height: size.height / 22.8,
@@ -276,7 +273,7 @@ class ArticleInfoScreen extends StatelessWidget {
                 articleInfoController.id.value =
                     int.parse(articleInfoController.relatedInfo[index].id!);
                 articleInfoController.getArticleInfo();
-                Get.to(ArticleInfoScreen());
+                Get.toNamed(RoutePage.articleInfo);
               },
               child: Padding(
                 padding:

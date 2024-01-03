@@ -25,6 +25,7 @@ class SolidColors {
   static const Color hintText = Color.fromARGB(255, 190, 190, 190);
   static const Color textFieldColor = Color.fromARGB(255, 225, 245, 245);
   static const Color surface = Color.fromARGB(255, 242, 242, 242);
+  static const Color snackBarBackgroundColor = Colors.red;
 }
 
 class GradientColors {

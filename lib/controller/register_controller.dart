@@ -1,12 +1,13 @@
-import 'dart:developer';
-
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:techblog/common/route_to_write_bottom_sheet.dart';
 import 'package:techblog/component/api_constant.dart';
+import 'package:techblog/component/my_colors.dart';
 import 'package:techblog/component/storage_constant.dart';
 import 'package:techblog/services/dio_service.dart';
 import 'package:techblog/view/main_screen/home_page.dart';
+import 'package:techblog/view/register/register_techblog.dart';
 
 class RegisterController extends GetxController {
   TextEditingController emailTextEditingController = TextEditingController();
@@ -26,7 +27,7 @@ class RegisterController extends GetxController {
 
     email = emailTextEditingController.text;
     userId = response.data["user_id"];
-    print(response);
+    debugPrint(response.toString());
   }
 
   verify() async {
@@ -38,19 +39,42 @@ class RegisterController extends GetxController {
     };
 
     var response = await DioService().postMethod(map, ApiConstant.postRegister);
-    print(response.data);
+    debugPrint(response.data.toString());
 
-    if (response.data["response"] == 'verified') {
-      var box = GetStorage();
-      box.write(token_, response.data["token"]);
-      box.write(userId_, response.data["user_id"]);
+    var status = response.data["response"];
+    switch (status) {
+      case 'verified':
+        var box = GetStorage();
+        box.write(StorageKey.token, response.data["token"]);
+        box.write(StorageKey.userId, response.data["user_id"]);
 
-      print("read::: " + box.read(token_));
-      print("read::: " + box.read(userId_));
+        debugPrint("read::: ${box.read(StorageKey.token)}");
+        debugPrint("read::: ${box.read(StorageKey.userId)}");
 
-      Get.to(() => HomePage());
+        Get.off(() => HomePage());
+        break;
+      case 'incorrect_code':
+        Get.snackbar('ERROR', 'active code is incorrect',
+            animationDuration: const Duration(microseconds: 600),
+            backgroundColor: SolidColors.snackBarBackgroundColor,
+            colorText: Colors.white,
+            snackStyle: SnackStyle.FLOATING);
+        break;
+      case 'expired':
+        Get.snackbar('ERROR', 'active code is expired',
+            animationDuration: const Duration(microseconds: 600),
+            backgroundColor: SolidColors.snackBarBackgroundColor,
+            colorText: Colors.white);
+        break;
+      default:
+    }
+  }
+
+  login() {
+    if (GetStorage().read(StorageKey.token) == null) {
+      Get.to(RegisterTechBlog());
     } else {
-      log('Error');
+      RouteToWriteBottomSheet().routeToWriteBottomSheet();
     }
   }
 }

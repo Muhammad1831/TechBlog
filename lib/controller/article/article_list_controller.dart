@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:techblog/component/api_constant.dart';
+import 'package:techblog/component/storage_constant.dart';
 import 'package:techblog/models/article_model.dart';
 import 'package:techblog/services/dio_service.dart';
 
@@ -33,8 +35,8 @@ class ArticleListController extends GetxController {
     articleList.clear();
 
     DioService dio = DioService();
-    var response = await dio.getMethod(ApiConstant.baseUrl +
-        'article/get.php?command=get_articles_with_tag_id&tag_id=$id&user_id=1');
+    var response = await dio.getMethod(
+        "${ApiConstant.baseUrl}article/get.php?command=get_articles_with_tag_id&tag_id=$id&user_id=${GetStorage().read(StorageKey.userId)}");
 
     if (response.statusCode == 200) {
       response.data.forEach((element) {

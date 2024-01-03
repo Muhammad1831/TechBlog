@@ -22,13 +22,25 @@ class $AssetsIconsGen {
   AssetGenImage get homeIcon =>
       const AssetGenImage('assets/icons/home_icon.png');
 
+  /// File path: assets/icons/microphon.png
+  AssetGenImage get microphon =>
+      const AssetGenImage('assets/icons/microphon.png');
+
   /// File path: assets/icons/microphone_icon.png
   AssetGenImage get microphoneIcon =>
       const AssetGenImage('assets/icons/microphone_icon.png');
 
+  /// File path: assets/icons/pencil_bottomsheet.png
+  AssetGenImage get pencilBottomsheet =>
+      const AssetGenImage('assets/icons/pencil_bottomsheet.png');
+
   /// File path: assets/icons/pencil_icon.png
   AssetGenImage get pencilIcon =>
       const AssetGenImage('assets/icons/pencil_icon.png');
+
+  /// File path: assets/icons/right_arrow.png
+  AssetGenImage get rightArrow =>
+      const AssetGenImage('assets/icons/right_arrow.png');
 
   /// File path: assets/icons/user_icon.png
   AssetGenImage get userIcon =>
@@ -39,8 +51,17 @@ class $AssetsIconsGen {
       const AssetGenImage('assets/icons/writer_icon.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [hashTagIcon, homeIcon, microphoneIcon, pencilIcon, userIcon, writerIcon];
+  List<AssetGenImage> get values => [
+        hashTagIcon,
+        homeIcon,
+        microphon,
+        microphoneIcon,
+        pencilBottomsheet,
+        pencilIcon,
+        rightArrow,
+        userIcon,
+        writerIcon
+      ];
 }
 
 class $AssetsImagesGen {
@@ -50,9 +71,9 @@ class $AssetsImagesGen {
   AssetGenImage get flashDown =>
       const AssetGenImage('assets/images/flash_down.png');
 
-  /// File path: assets/images/guide_robot.svg
-  SvgGenImage get guideRobot =>
-      const SvgGenImage('assets/images/guide_robot.svg');
+  /// File path: assets/images/happy_guide_robot.svg
+  SvgGenImage get happyGuideRobot =>
+      const SvgGenImage('assets/images/happy_guide_robot.svg');
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
@@ -65,9 +86,24 @@ class $AssetsImagesGen {
   AssetGenImage get profileAvatar =>
       const AssetGenImage('assets/images/profileAvatar.png');
 
+  /// File path: assets/images/sad_guide_robot.svg
+  SvgGenImage get sadGuideRobot =>
+      const SvgGenImage('assets/images/sad_guide_robot.svg');
+
+  /// File path: assets/images/single_place_holder.jpg
+  AssetGenImage get singlePlaceHolder =>
+      const AssetGenImage('assets/images/single_place_holder.jpg');
+
   /// List of all assets
-  List<dynamic> get values =>
-      [flashDown, guideRobot, logo, posterHomePage, profileAvatar];
+  List<dynamic> get values => [
+        flashDown,
+        happyGuideRobot,
+        logo,
+        posterHomePage,
+        profileAvatar,
+        sadGuideRobot,
+        singlePlaceHolder
+      ];
 }
 
 class Assets {

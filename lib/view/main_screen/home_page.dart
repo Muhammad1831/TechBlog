@@ -1,15 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:techblog/component/my_component.dart';
 import 'package:techblog/component/my_string.dart';
+import 'package:techblog/component/params.dart';
+import 'package:techblog/controller/register_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/component/my_colors.dart';
 import 'package:techblog/view/main_screen/home_screen.dart';
 import 'package:techblog/view/main_screen/profile_screen.dart';
 import 'dart:math' as math;
-import 'package:techblog/view/register_techblog.dart';
+import 'package:techblog/view/register/register_techblog.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -20,20 +21,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //for easy access to textThemes
-    TextTheme textTheme = Theme.of(context).textTheme;
-    //for easy access to size screens
-    var size = MediaQuery.of(context).size;
-    //the distance of the body from the right side to align
-    var bodyMargin = size.width / 12.5;
-
     return SafeArea(
       child: Scaffold(
         key: _key,
         drawer: Drawer(
           backgroundColor: SolidColors.drawerBackgrounColor,
           child: Padding(
-            padding: EdgeInsets.only(left: bodyMargin, right: bodyMargin),
+            padding: EdgeInsets.only(
+                left: Params.bodyMargin, right: Params.bodyMargin),
             child: ListView(
               children: [
                 DrawerHeader(
@@ -50,7 +45,7 @@ class HomePage extends StatelessWidget {
                   splashColor: SolidColors.drawerSplashColor,
                   title: Text(
                     'پروفایل کاربری',
-                    style: textTheme.bodyText1,
+                    style: Params.textTheme.bodyText1,
                   ),
                   onTap: () {},
                 ),
@@ -62,7 +57,7 @@ class HomePage extends StatelessWidget {
                   splashColor: SolidColors.drawerSplashColor,
                   title: Text(
                     'درباره تک‌بلاگ',
-                    style: textTheme.bodyText1,
+                    style: Params.textTheme.bodyText1,
                   ),
                   onTap: () {},
                 ),
@@ -74,7 +69,7 @@ class HomePage extends StatelessWidget {
                   splashColor: SolidColors.drawerSplashColor,
                   title: Text(
                     'اشتراک گذاری تک بلاگ',
-                    style: textTheme.bodyText1,
+                    style: Params.textTheme.bodyText1,
                   ),
                   onTap: () async {
                     await Share.share(
@@ -90,7 +85,7 @@ class HomePage extends StatelessWidget {
                   splashColor: SolidColors.drawerSplashColor,
                   title: Text(
                     'تک‌بلاگ در گیت هاب',
-                    style: textTheme.bodyText1,
+                    style: Params.textTheme.bodyText1,
                   ),
                   onTap: () {
                     myLaunchUrl(MyString.techBlogGithubUrl);
@@ -115,13 +110,13 @@ class HomePage extends StatelessWidget {
                 child: Icon(
                   Icons.menu,
                   color: SolidColors.menuIcon,
-                  size: size.width / 18,
+                  size: Params.size.width / 18,
                 ),
               ),
               //logo image in HomaPage appbar
               Image(
                 image: Assets.images.logo.provider(),
-                height: size.height / 13.6,
+                height: Params.size.height / 13.6,
               ),
               /* with Transform.rotate and named that angle: we can rotate
                     the widget assigned to child: */
@@ -134,7 +129,7 @@ class HomePage extends StatelessWidget {
                       icon: Icon(
                         Icons.search,
                         color: SolidColors.searchIcon,
-                        size: size.height / 31.6,
+                        size: Params.size.height / 31.6,
                       )))
             ],
           ),
@@ -146,23 +141,20 @@ class HomePage extends StatelessWidget {
             child: Obx(
               () {
                 return IndexedStack(index: selectedPageIndex.value, children: [
-                  HomeScreen(
-                      size: size,
-                      textTheme: textTheme,
-                      bodyMargin: bodyMargin), // index 0
-                  const RegisterTechBlog(), // index 1
+                  HomeScreen(), // index 0
+                  RegisterTechBlog(), // index 1
                   ProfileScreen(
-                      size: size,
-                      textTheme: textTheme,
-                      bodyMargin: bodyMargin), // index 2
+                      size: Params.size,
+                      textTheme: Params.textTheme,
+                      bodyMargin: Params.bodyMargin), // index 2
                 ]);
               },
             ),
           ),
           //buttons navigation bar
           BottomNavigationBar(
-            size: size,
-            bodyMargin: bodyMargin,
+            size: Params.size,
+            bodyMargin: Params.bodyMargin,
             setIndexPage: (value) {
               selectedPageIndex.value = value;
             },
@@ -173,6 +165,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class BottomNavigationBar extends StatelessWidget {
   const BottomNavigationBar(
       {super.key,
@@ -220,7 +213,7 @@ class BottomNavigationBar extends StatelessWidget {
                     )),
                 IconButton(
                     onPressed: (() {
-                      setIndexPage(1);
+                      Get.find<RegisterController>().login();
                     }),
                     icon: ImageIcon(
                       Assets.icons.writerIcon.provider(),

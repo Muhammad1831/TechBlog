@@ -14,6 +14,10 @@ class DioService {
         .then((response) {
       log(response.toString());
       return response;
+    }).catchError((error) {
+      if (error is DioException) {
+        return error.response!;
+      }
     });
   }
 
@@ -29,6 +33,10 @@ class DioService {
       log(response.statusCode.toString());
 
       return response;
+    }).catchError((error) {
+      if (error is DioException) {
+        return error.response!;
+      }
     });
   }
 }

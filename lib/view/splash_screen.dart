@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:techblog/component/my_colors.dart';
-import 'package:techblog/view/main_screen/home_page.dart';
-
+import 'package:techblog/common/route_page.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
   @override
@@ -15,8 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     //after 2 seconds, it will go to the HomePage
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => HomePage()));
+      Get.offAndToNamed(RoutePage.homePage);
     });
 
     super.initState();

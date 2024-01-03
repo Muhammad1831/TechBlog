@@ -9,7 +9,7 @@ import 'package:validators/validators.dart';
 // ignore: must_be_immutable
 class RegisterTechBlog extends StatelessWidget {
   RegisterTechBlog({super.key});
-  RegisterController registerController = Get.put(RegisterController());
+  var registerController = Get.find<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class RegisterTechBlog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              Assets.images.guideRobot.path,
+              Assets.images.happyGuideRobot.path,
               height: size.height / 6.7,
             ),
             Padding(
@@ -33,7 +33,7 @@ class RegisterTechBlog extends StatelessWidget {
                   text: TextSpan(
                     text: MyString.welcomeTechBlog,
                     style: textTheme.bodyText1,
-                  )), 
+                  )),
             ),
             Padding(
               padding: EdgeInsets.only(top: size.height / 12),
@@ -92,7 +92,7 @@ class RegisterTechBlog extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () async{
+                    onPressed: () async {
                       registerController.register();
                       registerController.emailTextEditingController.clear();
                       // Navigator.pop(context);
@@ -134,10 +134,8 @@ class RegisterTechBlog extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(50, 20, 50, 50),
                   child: TextField(
-                    controller: registerController.activeCodeTextEditingController,
-                    onChanged: (value) {
-                      isEmail(value);
-                    },
+                    controller:
+                        registerController.activeCodeTextEditingController,
                     style: textTheme.bodyText1,
                     textAlign: TextAlign.center,
                     textDirection: TextDirection.ltr,

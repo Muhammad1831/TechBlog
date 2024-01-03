@@ -1,2 +1,4 @@
-String token_ = 'token';
-String userId_ = 'user_id';
+class StorageKey {
+  static const String token = 'token';
+  static const String userId = 'user_id';
+}
